@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %} <!--Расщирение базового шаблона-->
+
+{% block title %}<title>Home Page</title>{% endblock %}
+
+{% block content %}
+<h1>Film Shop Home Page</h1>
+
+  <p>Welcome to <em>Film Shop</em>, a site to find good quality films to watching.</p>
+
+<h2>Dynamic content</h2>
+
+  <p>The film shop has the following record counts:</p>
+  <ul>
+    <li><strong>Films:</strong> {{ num_films }}</li>
+    <li><strong>Rent Films:</strong> {{ num_rents }}</li>
+    <li><strong>Rent Films available:</strong> {{ num_rents_available }}</li>
+    <li><strong>Producers:</strong> {{ num_producers }}</li>
+    <li><strong>Genres:</strong> {{ num_genres }}</li>
+    <li><strong>Films with word "dark":</strong> {{ name_film }}</li>
+  </ul>
+
+{% endblock %}

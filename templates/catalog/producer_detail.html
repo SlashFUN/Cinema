@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Producer: {{ producer.first_name }} {{ producer.last_name }}</h1>
+
+  <p>({{ producer.date_of_birth }} - {% if producer.date_of_death %}{{producer.date_of_death}} {% else %} Alive {% endif %})</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Films</h4>
+
+    {% for film in producer.film_set.all %} <!--Метод для один ко многим ( Foreign Key) у фильма может быть только 1 продюсер, у продюсера - много фильмов ( первичный ключ определён в стороне много - фильмы)-->
+    <hr>
+    <p><a href="{% url 'film-detail' film.pk %}">{{ film.title }}</a></p>
+    <p> {{film.summary}}</p>
+    {% endfor %}
+  </div>
+{% endblock %}

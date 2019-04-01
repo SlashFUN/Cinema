@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Producer List</h1>
+
+    {% if producer_list %}
+    <ul>
+
+      {% for producer in producer_list %}
+      <li>
+        <a href="{{ producer.get_absolute_url}}">
+           {{ producer }} ({{producer.date_of_birth}} - {% if producer.date_of_death %}{{producer.date_of_death}}{% endif %}) </a>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no films in the library.</p>
+    {% endif %}       
+{% endblock %}
+

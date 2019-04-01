@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ film.title }}</h1>
+
+  <p><strong>Author:</strong> <a href="{% url 'producer-detail' film.producer.pk %}">{{ film.producer }}</a></p> <!-- author detail link not yet defined -->
+  <p><strong>Summary:</strong> {{ film.summary }}</p>
+  <p><strong>Language:</strong> {{ film.language }}</p>
+  <p><strong>Genre:</strong> {% for genre in film.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Rents</h4>
+
+    {% for rent in film.filmrent_set.all %} <!--метод является "автомагически"-сконструированным Django для того, чтобы вернуть множество записей FilmRent, связанных с данным фильмом Film.-->
+    <hr>
+    <p class="{% if rent.status == 'a' %}text-success{% elif rent.status == 'd' %}text-danger{% else %}text-warning{% endif %}">{{ rent.get_status_display }}</p>
+    {% if rent.status != 'a' %}<p><strong>Due to be returned:</strong> {{rent.due_back}}</p>{% endif %}
+    <p><strong>Imprint:</strong> {{rent.imprint}}</p>
+    <p class="text-muted"><strong>Id:</strong> {{rent.id}}</p>
+    {% endfor %}
+  </div>
+{% endblock %}
